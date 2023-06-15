@@ -1,10 +1,18 @@
+import React from "react";
 import { NextPageContext } from "next";
-import { getSession, signOut } from "next-auth/react";
-import useCurrentUser from "@/hooks/useCurrentUser";
+import { getSession } from "next-auth/react";
+
+import Navbar from "@/components/Navbar";
+import Billboard from "@/components/Billboard";
+import MovieList from "@/components/MovieList";
+import InfoModal from "@/components/InfoModal";
+import useMovieList from "@/hooks/useMovieList";
+import useFavorites from "@/hooks/useFavorites";
+import useInfoModalStore from "@/hooks/useInfoModalStore";
+import Footer from "@/components/footer";
 
 export async function getServerSideProps(context: NextPageContext) {
   const session = await getSession(context);
-  console.log("session", session);
 
   if (!session) {
     return {
@@ -19,16 +27,24 @@ export async function getServerSideProps(context: NextPageContext) {
     props: {},
   };
 }
-export default function Home() {
-  const { data: user } = useCurrentUser();
+
+const Home = () => {
+  const { data: movies = [] } = useMovieList();
+  const { data: favorites = [] } = useFavorites();
+  const { isOpen, closeModal } = useInfoModalStore();
+
   return (
     <>
-      <h1 className=" text-9xl text-white">netflixclone</h1>
-      <p className=" text-white"> login as {user?.email}</p>
-      <button className=" bg-white h-10 w-full" onClick={() => signOut()}>
-        {" "}
-        logut
-      </button>
+      <InfoModal visible={isOpen} onClose={closeModal} />
+      <Navbar />
+      <Billboard />
+      <div className="pb-40">
+        <MovieList title="Trending Now" data={movies} />
+        <MovieList title="My List" data={favorites} />
+      </div>
+      <Footer />
     </>
   );
-}
+};
+
+export default Home;

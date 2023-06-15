@@ -8,23 +8,23 @@ import { FaGithub } from "react-icons/fa";
 
 import Input from "@/components/Input";
 
-// export async function getServerSideProps(context: NextPageContext) {
-//   const session = await getSession(context);
-//   console.log("session", session);
+export async function getServerSideProps(context: NextPageContext) {
+  const session = await getSession(context);
+  console.log("session", session);
 
-//   if (session) {
-//     return {
-//       redirect: {
-//         destination: "/",
-//         permanent: false,
-//       },
-//     };
-//   }
+  if (session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
 
-//   return {
-//     props: {},
-//   };
-// }
+  return {
+    props: {},
+  };
+}
 
 const Auth = () => {
   // console.log("secret", process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID);
