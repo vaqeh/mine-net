@@ -8,7 +8,6 @@ import {
 import AccountMenu from "@/components/AccountMenu";
 import MobileMenu from "@/components/MobileMenu";
 import NavbarItem from "@/components/NavbarItem";
-import Image from "next/image";
 
 const TOP_OFFSET = 66;
 
@@ -49,7 +48,7 @@ const Navbar = () => {
           showBackground ? "bg-zinc-900 bg-opacity-90" : ""
         }`}
       >
-        <Image src="/images/logo.png" className="h-4 lg:h-7" alt="Logo" />
+        <img src="/images/logo.png" className="h-4 lg:h-7" alt="Logo" />
         <div className="flex-row ml-8 gap-7 hidden lg:flex">
           <NavbarItem label="Home" active />
           <NavbarItem label="Series" />
@@ -82,7 +81,7 @@ const Navbar = () => {
             className="flex flex-row items-center gap-2 cursor-pointer relative"
           >
             <div className="w-6 h-6 lg:w-10 lg:h-10 rounded-md overflow-hidden">
-              <Image src="/images/default-blue.png" alt="" />
+              <img src="/images/default-blue.png" alt="" />
             </div>
             <ChevronDownIcon
               className={`w-4 text-white fill-white transition ${
